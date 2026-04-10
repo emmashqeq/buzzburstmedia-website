@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BuzzBurst Media</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#F5A800;
+  --gold2:#E09200;
+  --golddim:rgba(245,168,0,0.15);
+  --bbk:#0C0C0C;
+  --bbg:#141414;
+  --bbg2:#1C1C1C;
+  --bbw:#F5F0E8;
+  --bbm:#8A8070;
+  --bbc:#181818;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bbk);color:var(--bbw);font-family:'Manrope',sans-serif;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:999;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(12,12,12,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(245,168,0,0.18);}
+.nav-logo img{height:44px;width:auto;display:block;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--bbm);font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;cursor:pointer;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:#0C0C0C;border:none;padding:11px 26px;border-radius:4px;font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;cursor:pointer;letter-spacing:.5px;transition:transform .15s,box-shadow .15s;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(245,168,0,0.4);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:130px 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 65% 45%,rgba(245,168,0,0.10) 0%,transparent 68%);pointer-events:none;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(245,168,0,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(245,168,0,0.035) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;}
+.hero-logo-stamp{position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:.04;width:600px;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,168,0,0.1);border:1px solid rgba(245,168,0,0.3);border-radius:100px;padding:6px 18px;font-size:11px;font-weight:800;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:30px;width:fit-content;}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.4);}}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,10vw,136px);line-height:.93;margin-bottom:22px;}
+.hero h1 .accent{color:var(--gold);}
+.hero-sub{font-size:clamp(14px,1.8vw,17px);color:var(--bbm);max-width:520px;line-height:1.75;margin-bottom:44px;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#0C0C0C;border:none;padding:15px 34px;border-radius:4px;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;cursor:pointer;letter-spacing:.5px;transition:transform .15s,box-shadow .15s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(245,168,0,0.4);}
+.btn-outline{background:transparent;color:var(--bbw);border:1px solid rgba(245,168,0,0.3);padding:15px 34px;border-radius:4px;font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;cursor:pointer;transition:all .2s;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stat-row{display:flex;gap:52px;margin-top:68px;flex-wrap:wrap;}
+.hero-stat strong{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--gold);display:block;line-height:1;}
+.hero-stat span{font-size:11px;color:var(--bbm);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;border-top:1px solid rgba(245,168,0,0.1);border-bottom:1px solid rgba(245,168,0,0.1);padding:16px 0;background:var(--bbg);}
+.marquee-track{display:flex;gap:52px;animation:marquee 24s linear infinite;white-space:nowrap;}
+.marquee-track span{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--bbm);letter-spacing:3px;}
+.marquee-track .dot{color:var(--gold);}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SECTIONS */
+section{padding:100px 48px;}
+.section-label{font-size:11px;font-weight:800;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,74px);line-height:1;margin-bottom:18px;}
+.section-body{font-size:16px;color:var(--bbm);line-height:1.8;max-width:580px;}
+
+/* ABOUT */
+.about-section{background:var(--bbk);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-top:60px;}
+.about-quote{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,3.2vw,46px);color:var(--bbw);line-height:1.1;border-left:4px solid var(--gold);padding-left:28px;margin-bottom:36px;}
+.about-quote em{color:var(--gold);font-style:normal;}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mv-card{background:var(--bbg);border:1px solid rgba(245,168,0,0.18);border-radius:8px;padding:26px;}
+.mv-card h4{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);margin-bottom:10px;letter-spacing:1px;}
+.mv-card p{font-size:13px;color:var(--bbm);line-height:1.8;}
+.about-right{font-size:15px;color:var(--bbm);line-height:1.9;}
+.about-right p+p{margin-top:14px;}
+.about-right strong{color:var(--bbw);}
+
+/* FOUNDER */
+.founder-block{margin-top:36px;background:linear-gradient(135deg,rgba(245,168,0,0.08),rgba(245,168,0,0.03));border:1px solid rgba(245,168,0,0.3);border-radius:12px;padding:30px;display:flex;gap:22px;align-items:flex-start;}
+.founder-avi{width:68px;height:68px;border-radius:50%;background:rgba(245,168,0,0.15);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold);flex-shrink:0;letter-spacing:1px;}
+.founder-details{flex:1;}
+.founder-details .fname{font-size:20px;font-weight:800;color:var(--bbw);display:block;margin-bottom:3px;}
+.founder-details .frole{font-size:11px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:10px;}
+.founder-details p{font-size:13px;color:var(--bbm);line-height:1.75;}
+
+/* SERVICES */
+.services-section{background:var(--bbg);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:56px;}
+.service-card{background:var(--bbk);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:32px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.service-card:hover::after{transform:scaleX(1);}
+.service-card:hover{border-color:rgba(245,168,0,0.25);transform:translateY(-5px);}
+.s-icon{width:46px;height:46px;background:var(--golddim);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px;}
+.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--bbw);letter-spacing:1px;margin-bottom:10px;}
+.service-card p{font-size:13px;color:var(--bbm);line-height:1.7;margin-bottom:18px;}
+.s-link{font-size:12px;color:var(--gold);font-weight:800;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;}
+
+/* QUOTE BANNER */
+.quote-section{background:var(--bbk);padding:80px 48px;}
+.quote-inner{background:linear-gradient(135deg,rgba(245,168,0,0.12),rgba(245,168,0,0.04));border:1px solid rgba(245,168,0,0.35);border-radius:16px;padding:60px 56px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.quote-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,5vw,68px);line-height:1;color:var(--bbw);margin-bottom:14px;}
+.quote-left h2 em{color:var(--gold);font-style:normal;}
+.quote-left p{font-size:16px;color:var(--bbm);max-width:460px;line-height:1.7;}
+.quote-right{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.quote-btn{display:inline-flex;align-items:center;gap:12px;background:var(--gold);color:#0C0C0C;border:none;padding:20px 44px;border-radius:8px;font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.3px;}
+.quote-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(245,168,0,0.45);}
+.quote-btn svg{width:20px;height:20px;stroke:#0C0C0C;fill:none;stroke-width:2.5;}
+.quote-url{font-size:12px;color:var(--bbm);font-weight:600;}
+.quote-url a{color:var(--gold);}
+
+/* DASHBOARD */
+.dashboard-section{background:var(--bbg);}
+.dash-box{background:var(--bbc);border:1px solid rgba(255,255,255,0.06);border-radius:14px;margin-top:56px;overflow:hidden;}
+.dash-hdr{padding:20px 28px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;}
+.dash-hdr h3{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--bbw);letter-spacing:1px;}
+.live-pill{display:flex;align-items:center;gap:7px;font-size:11px;color:#4ADE80;font-weight:800;letter-spacing:1px;}
+.live-pill::before{content:'';width:7px;height:7px;background:#4ADE80;border-radius:50%;animation:pulse 1.2s infinite;}
+.dtabs{display:flex;gap:4px;padding:14px 28px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.dtab{padding:8px 18px;border-radius:4px;font-size:12px;font-weight:700;color:var(--bbm);cursor:pointer;transition:all .2s;border:none;background:transparent;font-family:'Manrope',sans-serif;letter-spacing:.5px;}
+.dtab.active{background:var(--gold);color:#0C0C0C;}
+.dtab:hover:not(.active){color:var(--bbw);}
+.dcontent{padding:28px;}
+.dstats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+.dstat{background:var(--bbk);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:20px;}
+.dstat .dl{font-size:10px;color:var(--bbm);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-bottom:8px;}
+.dstat .dv{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--bbw);line-height:1;}
+.dstat .dc{font-size:11px;color:#4ADE80;font-weight:700;margin-top:4px;}
+.dstat .dc.neg{color:#F87171;}
+.chart-box{background:var(--bbk);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:22px;margin-bottom:14px;}
+.chart-lbl{font-size:12px;font-weight:700;color:var(--bbw);margin-bottom:18px;}
+.barchart{display:flex;align-items:flex-end;gap:8px;height:110px;}
+.bwrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.bar{width:100%;border-radius:3px 3px 0 0;cursor:pointer;transition:opacity .2s;}
+.bar:hover{opacity:.7;}
+.blbl{font-size:10px;color:var(--bbm);font-weight:700;}
+.drow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.alist .aitem{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.aitem:last-child{border-bottom:none;}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.atxt{font-size:12px;color:var(--bbm);flex:1;}
+.atm{font-size:10px;color:rgba(255,255,255,0.25);font-weight:700;}
+.plist .pi{margin-bottom:14px;}
+.pi .pn{font-size:12px;font-weight:700;color:var(--bbw);margin-bottom:5px;display:flex;justify-content:space-between;}
+.pi .pn span{color:var(--bbm);font-weight:500;}
+.pbar{background:rgba(255,255,255,0.06);border-radius:3px;height:5px;overflow:hidden;}
+.pfill{height:100%;border-radius:3px;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* TEAM */
+.team-section{background:var(--bbk);}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:56px;}
+.tcard{background:var(--bbg);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:28px;text-align:center;transition:transform .2s,border-color .2s;position:relative;}
+.tcard:hover{transform:translateY(-4px);border-color:rgba(245,168,0,0.2);}
+.tcard.founder{border-color:rgba(245,168,0,0.45);background:linear-gradient(160deg,rgba(245,168,0,0.06),var(--bbg));}
+.fcrown{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0C0C0C;font-size:9px;font-weight:900;padding:4px 14px;border-radius:100px;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;}
+.tavi{width:62px;height:62px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;}
+.tcard h4{font-weight:800;font-size:15px;color:var(--bbw);margin-bottom:4px;}
+.tcard .trole{font-size:11px;color:var(--bbm);text-transform:uppercase;letter-spacing:1px;font-weight:700;}
+.tstat{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05);font-size:11px;color:var(--gold);font-weight:800;}
+
+/* CONTACT */
+.contact-section{background:var(--bbg);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:60px;align-items:start;}
+.contact-info h3{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--bbw);margin-bottom:28px;line-height:1;}
+.contact-info h3 em{color:var(--gold);font-style:normal;}
+.ci{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+.cico{width:44px;height:44px;background:var(--golddim);border:1px solid rgba(245,168,0,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ci div strong{display:block;font-size:12px;color:var(--bbw);font-weight:800;margin-bottom:2px;letter-spacing:.5px;}
+.ci div a,.ci div span{font-size:13px;color:var(--bbm);}
+.ci div a{color:var(--gold);transition:opacity .2s;}
+.ci div a:hover{opacity:.75;}
+.cform{background:var(--bbc);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:36px;}
+.fr{margin-bottom:18px;}
+.fr label{display:block;font-size:11px;font-weight:800;color:var(--bbm);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:7px;}
+.fr input,.fr textarea,.fr select{width:100%;background:var(--bbg);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:12px 16px;color:var(--bbw);font-family:'Manrope',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+.fr input:focus,.fr textarea:focus,.fr select:focus{border-color:var(--gold);}
+.fr textarea{resize:vertical;min-height:96px;}
+.fr select option{background:#181818;}
+.fsub{width:100%;background:var(--gold);color:#0C0C0C;border:none;padding:15px;border-radius:6px;font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:opacity .2s,transform .15s;}
+.fsub:hover{opacity:.9;transform:translateY(-1px);}
+.fsuccess{display:none;text-align:center;padding:20px;color:#4ADE80;font-weight:800;font-size:15px;}
+
+/* FOOTER */
+footer{background:var(--bbk);padding:60px 48px 32px;border-top:1px solid rgba(245,168,0,0.1);}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.fbrand img{height:42px;margin-bottom:14px;display:block;}
+.fbrand p{font-size:13px;color:var(--bbm);line-height:1.8;max-width:240px;}
+.fcol h5{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--bbw);letter-spacing:2px;margin-bottom:14px;}
+.fcol a{display:block;font-size:13px;color:var(--bbm);margin-bottom:8px;cursor:pointer;transition:color .2s;}
+.fcol a:hover{color:var(--gold);}
+.fbot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;font-size:12px;color:rgba(255,255,255,0.25);}
+.fbot a{color:var(--gold);}
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .hero{padding:100px 20px 60px;}
+  .about-grid,.mv-grid,.contact-grid{grid-template-columns:1fr;}
+  .dstats{grid-template-columns:repeat(2,1fr);}
+  .drow{grid-template-columns:1fr;}
+  .ftop{grid-template-columns:1fr 1fr;}
+  section{padding:70px 20px;}
+  .hero-stat-row{gap:30px;}
+  .quote-inner{flex-direction:column;padding:40px 28px;}
+  .founder-block{flex-direction:column;align-items:center;text-align:center;}
+  .quote-section{padding:60px 20px;}
+}
+</style>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer;">
+    <img src="./logo.png" alt="BuzzBurst Media" style="height:44px;filter:brightness(0) invert(1);"/>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</a></li>
+    <li><a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Services</a></li>
+    <li><a onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">Analytics</a></li>
+    <li><a onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Team</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <img src="./logo.png" class="hero-logo-stamp" alt=""/>
+  <div class="hero-tag">London, United Kingdom</div>
+  <h1>WE MAKE<br>BRANDS<br><span class="accent">GO VIRAL</span></h1>
+  <p class="hero-sub">No one knows more about marketing than BuzzBurst Media. We turn bold ideas into powerful brand stories that inspire, influence, and drive global engagement.</p>
+  <div class="hero-buttons">
+    <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+    <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Talk</button>
+  </div>
+  <div class="hero-stat-row">
+    <div class="hero-stat"><strong id="c1">0</strong><span>Clients Served</span></div>
+    <div class="hero-stat"><strong id="c2">0</strong><span>Campaigns Run</span></div>
+    <div class="hero-stat"><strong id="c3">0%</strong><span>Avg ROI Boost</span></div>
+    <div class="hero-stat"><strong id="c4">0</strong><span>Countries Reached</span></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>EMAIL MARKETING</span><span class="dot">◆</span><span>SEO STRATEGY</span><span class="dot">◆</span><span>PAID ADVERTISING</span><span class="dot">◆</span><span>SOCIAL MEDIA</span><span class="dot">◆</span><span>CONTENT MARKETING</span><span class="dot">◆</span><span>MARKETING FUNNELS</span><span class="dot">◆</span><span>EMAIL MARKETING</span><span class="dot">◆</span><span>SEO STRATEGY</span><span class="dot">◆</span><span>PAID ADVERTISING</span><span class="dot">◆</span><span>SOCIAL MEDIA</span><span class="dot">◆</span><span>CONTENT MARKETING</span><span class="dot">◆</span><span>MARKETING FUNNELS</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="section-label">Who We Are</div>
+  <div class="about-grid">
+    <div>
+      <div class="about-quote">"No one knows more about marketing than <em>BuzzBurst Media</em>"</div>
+      <div class="mv-grid">
+        <div class="mv-card"><h4>Mission</h4><p>To help brands stand out and grow by delivering innovative, engaging, and results-driven marketing solutions.</p></div>
+        <div class="mv-card"><h4>Vision</h4><p>To become a leading force in marketing, transforming ideas into powerful brand stories that inspire, influence, and drive global engagement.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="about-right">
+        <p>BuzzBurst Media is a full-service digital marketing agency headquartered in <strong>London, United Kingdom</strong>. We are built for brands that refuse to be invisible.</p>
+        <p>From scrappy startups to established enterprises, we bring relentless creativity and data-driven precision to every campaign. Our mission: make your brand impossible to ignore.</p>
+        <p>We don't just generate noise — we create <strong>meaningful engagement</strong> that converts audiences into loyal customers and customers into brand ambassadors.</p>
+      </div>
+      <div class="founder-block">
+        <div class="founder-avi">EO</div>
+        <div class="founder-details">
+          <span class="fname">Emmanuel Obiechie</span>
+          <span class="frole">Founder &amp; CEO</span>
+          <p>Visionary marketer and entrepreneur who built BuzzBurst Media from the ground up. Emmanuel's bold approach to brand storytelling has helped dozens of businesses break through the noise and grow globally — all from London.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">OUR SERVICES</div>
+  <div class="section-body">From organic growth to paid dominance — we've got every angle covered.</div>
+  <div class="services-grid">
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">✉️</div>
+      <h3>Email Marketing</h3>
+      <p>Precision-targeted campaigns that nurture leads, convert prospects, and keep your audience hooked with every send.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">📱</div>
+      <h3>Social Media Marketing</h3>
+      <p>Content strategies across Instagram, TikTok, LinkedIn and beyond that grow real, engaged followings.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">🔍</div>
+      <h3>SEO Strategy</h3>
+      <p>Dominate search rankings with technical SEO, keyword strategy, and content optimisation that puts you at the top.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">💰</div>
+      <h3>Paid Advertising (PPC)</h3>
+      <p>High-ROI campaigns on Google, Meta, TikTok, and more. Every penny of your ad spend working harder.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">📝</div>
+      <h3>Content Marketing</h3>
+      <p>Blogs, videos, infographics, and brand storytelling that build trust and position you as the authority.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+    <div class="service-card" onclick="window.open('http://buzzburstmedia.co','_blank')">
+      <div class="s-icon">📊</div>
+      <h3>Marketing Funnel Strategy</h3>
+      <p>End-to-end funnel architecture engineered to maximise customer lifetime value and minimise drop-off.</p>
+      <span class="s-link">Learn More →</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE SECTION -->
+<section class="quote-section" id="quote">
+  <div class="quote-inner">
+    <div class="quote-left">
+      <h2>WANT TO GET A<br><em>QUOTE FROM US?</em></h2>
+      <p>Ready to take your brand to the next level? Click the button below and let's build something incredible together. No fluff — just real results from London's best.</p>
+    </div>
+    <div class="quote-right">
+      <button class="quote-btn" onclick="window.open('http://buzzburstmedia.co','_blank')">
+        Get Your Free Quote
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <span class="quote-url">Visit <a href="http://buzzburstmedia.co" target="_blank">buzzburstmedia.co</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="dashboard-section">
+  <div class="section-label">Live Analytics</div>
+  <div class="section-title">PERFORMANCE<br>DASHBOARD</div>
+  <div class="section-body">Real-time marketing metrics. Watch your brand grow.</div>
+  <div class="dash-box">
+    <div class="dash-hdr">
+      <h3>Campaign Overview — Q2 2026</h3>
+      <span class="live-pill">LIVE</span>
+    </div>
+    <div class="dtabs">
+      <button class="dtab active" onclick="switchTab('ov',this)">Overview</button>
+      <button class="dtab" onclick="switchTab('sm',this)">Social</button>
+      <button class="dtab" onclick="switchTab('seo',this)">SEO</button>
+      <button class="dtab" onclick="switchTab('em',this)">Email</button>
+    </div>
+    <div class="dcontent">
+      <div class="tab-panel active" id="tab-ov">
+        <div class="dstats">
+          <div class="dstat"><div class="dl">Impressions</div><div class="dv">4.8M</div><div class="dc">↑ 23% this month</div></div>
+          <div class="dstat"><div class="dl">Conversions</div><div class="dv">12.4K</div><div class="dc">↑ 18% vs last</div></div>
+          <div class="dstat"><div class="dl">Avg. ROI</div><div class="dv">340%</div><div class="dc">↑ 7% this quarter</div></div>
+          <div class="dstat"><div class="dl">Ad Spend</div><div class="dv">£82K</div><div class="dc neg">↓ 4% (optimised)</div></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-lbl">Monthly Impressions (Jan–Jun 2026)</div>
+          <div class="barchart" id="barchart"></div>
+        </div>
+        <div class="drow">
+          <div class="chart-box">
+            <div class="chart-lbl">Channel Performance</div>
+            <div class="plist">
+              <div class="pi"><div class="pn">Social Media <span>38%</span></div><div class="pbar"><div class="pfill" style="width:38%;background:var(--gold);"></div></div></div>
+              <div class="pi"><div class="pn">Paid Ads <span>28%</span></div><div class="pbar"><div class="pfill" style="width:28%;background:#E09200;"></div></div></div>
+              <div class="pi"><div class="pn">SEO / Organic <span>20%</span></div><div class="pbar"><div class="pfill" style="width:20%;background:#B87800;"></div></div></div>
+              <div class="pi"><div class="pn">Email <span>14%</span></div><div class="pbar"><div class="pfill" style="width:14%;background:#8A5A00;"></div></div></div>
+            </div>
+          </div>
+          <div class="chart-box">
+            <div class="chart-lbl">Recent Activity</div>
+            <div class="alist" id="alist">
+              <div class="aitem"><div class="adot" style="background:#4ADE80;"></div><div class="atxt">Instagram campaign reached 200K</div><div class="atm">2m ago</div></div>
+              <div class="aitem"><div class="adot" style="background:var(--gold);"></div><div class="atxt">New email sequence launched</div><div class="atm">14m ago</div></div>
+              <div class="aitem"><div class="adot" style="background:#60A5FA;"></div><div class="atxt">SEO audit completed</div><div class="atm">1h ago</div></div>
+              <div class="aitem"><div class="adot" style="background:#F472B6;"></div><div class="atxt">TikTok ad set approved</div><div class="atm">2h ago</div></div>
+              <div class="aitem"><div class="adot" style="background:#A78BFA;"></div><div class="atxt">New client onboarded</div><div class="atm">3h ago</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-sm">
+        <div class="dstats">
+          <div class="dstat"><div class="dl">Total Followers</div><div class="dv">148K</div><div class="dc">↑ 12% this month</div></div>
+          <div class="dstat"><div class="dl">Engagement Rate</div><div class="dv">6.4%</div><div class="dc">↑ 1.2% avg</div></div>
+          <div class="dstat"><div class="dl">Posts Published</div><div class="dv">284</div><div class="dc">This quarter</div></div>
+          <div class="dstat"><div class="dl">Total Reach</div><div class="dv">2.1M</div><div class="dc">↑ 31% vs Q1</div></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-lbl">Followers by Platform</div>
+          <div class="plist">
+            <div class="pi"><div class="pn">Instagram @buzz.burs <span>62K</span></div><div class="pbar"><div class="pfill" style="width:62%;background:var(--gold);"></div></div></div>
+            <div class="pi"><div class="pn">TikTok @buzzburstmedia1 <span>71K</span></div><div class="pbar"><div class="pfill" style="width:71%;background:#60A5FA;"></div></div></div>
+            <div class="pi"><div class="pn">LinkedIn <span>15K</span></div><div class="pbar"><div class="pfill" style="width:15%;background:#A78BFA;"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-seo">
+        <div class="dstats">
+          <div class="dstat"><div class="dl">Organic Traffic</div><div class="dv">84K</div><div class="dc">↑ 29% MoM</div></div>
+          <div class="dstat"><div class="dl">Keywords Ranked</div><div class="dv">1,240</div><div class="dc">↑ 340 new</div></div>
+          <div class="dstat"><div class="dl">Domain Rating</div><div class="dv">61</div><div class="dc">↑ 4 pts</div></div>
+          <div class="dstat"><div class="dl">Backlinks</div><div class="dv">3.8K</div><div class="dc">↑ 18% growth</div></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-lbl">Top Ranking Categories</div>
+          <div class="plist">
+            <div class="pi"><div class="pn">Digital Marketing <span>Top 3</span></div><div class="pbar"><div class="pfill" style="width:90%;background:var(--gold);"></div></div></div>
+            <div class="pi"><div class="pn">Social Media Strategy <span>Top 5</span></div><div class="pbar"><div class="pfill" style="width:75%;background:#E09200;"></div></div></div>
+            <div class="pi"><div class="pn">Email Campaigns <span>Top 8</span></div><div class="pbar"><div class="pfill" style="width:55%;background:#B87800;"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-em">
+        <div class="dstats">
+          <div class="dstat"><div class="dl">Emails Sent</div><div class="dv">420K</div><div class="dc">This quarter</div></div>
+          <div class="dstat"><div class="dl">Open Rate</div><div class="dv">42%</div><div class="dc">↑ 8% above avg</div></div>
+          <div class="dstat"><div class="dl">Click Rate</div><div class="dv">9.8%</div><div class="dc">vs 2.6% industry</div></div>
+          <div class="dstat"><div class="dl">Email Revenue</div><div class="dv">£48K</div><div class="dc">↑ 22% vs Q1</div></div>
+        </div>
+        <div class="chart-box">
+          <div class="chart-lbl">Email vs Industry Benchmarks</div>
+          <div class="plist">
+            <div class="pi"><div class="pn">Open Rate <span>42% vs 21% industry</span></div><div class="pbar"><div class="pfill" style="width:84%;background:var(--gold);"></div></div></div>
+            <div class="pi"><div class="pn">Click-Through <span>9.8% vs 2.6%</span></div><div class="pbar"><div class="pfill" style="width:75%;background:#E09200;"></div></div></div>
+            <div class="pi"><div class="pn">Unsubscribe <span>0.2% vs 0.5%</span></div><div class="pbar"><div class="pfill" style="width:20%;background:#4ADE80;"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="team-section">
+  <div class="section-label">The People</div>
+  <div class="section-title">IN THE OFFICE</div>
+  <div class="section-body">The minds and muscle behind every campaign that hits different.</div>
+  <div class="team-grid">
+    <div class="tcard founder">
+      <div class="fcrown">Founder &amp; CEO</div>
+      <div class="tavi" style="background:rgba(245,168,0,0.2);color:var(--gold);border:2px solid var(--gold);">EO</div>
+      <h4>Emmanuel Obiechie</h4>
+      <span class="trole">Founder &amp; CEO</span>
+      <div class="tstat">Built BuzzBurst from scratch</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(245,168,0,0.12);color:var(--gold);">JO</div>
+      <h4>Jordan Okafor</h4>
+      <span class="trole">Creative Director</span>
+      <div class="tstat">47 campaigns led</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(96,165,250,0.15);color:#60A5FA;">SN</div>
+      <h4>Sofia Nakamura</h4>
+      <span class="trole">Head of SEO</span>
+      <div class="tstat">1,200+ keywords ranked</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(74,222,128,0.15);color:#4ADE80;">MK</div>
+      <h4>Marcus King</h4>
+      <span class="trole">Paid Ads Lead</span>
+      <div class="tstat">£2M+ ad spend managed</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(244,114,182,0.15);color:#F472B6;">AA</div>
+      <h4>Amira Adeyemi</h4>
+      <span class="trole">Social Media Strategist</span>
+      <div class="tstat">148K followers grown</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(167,139,250,0.15);color:#A78BFA;">RL</div>
+      <h4>Ryan Leighton</h4>
+      <span class="trole">Email Marketing Expert</span>
+      <div class="tstat">42% avg open rate</div>
+    </div>
+    <div class="tcard">
+      <div class="tavi" style="background:rgba(251,191,36,0.15);color:#FBBF24;">PE</div>
+      <h4>Priya Emmanuel</h4>
+      <span class="trole">Content Strategist</span>
+      <div class="tstat">500+ pieces published</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label">Get In Touch</div>
+  <div class="section-title">LET'S BUILD<br>SOMETHING BIG</div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Ready to<br><em>Go Viral?</em></h3>
+      <div class="ci"><div class="cico">📧</div><div><strong>Email</strong><a href="mailto:buzzburstmedia1@gmail.com">buzzburstmedia1@gmail.com</a></div></div>
+      <div class="ci"><div class="cico">🌐</div><div><strong>Website</strong><a href="http://buzzburstmedia.co" target="_blank">buzzburstmedia.co</a></div></div>
+      <div class="ci"><div class="cico">📸</div><div><strong>Instagram</strong><a href="https://instagram.com/buzz.burs" target="_blank">@buzz.burs</a></div></div>
+      <div class="ci"><div class="cico">🎵</div><div><strong>TikTok</strong><a href="https://tiktok.com/@buzzburstmedia1" target="_blank">@buzzburstmedia1</a></div></div>
+      <div class="ci"><div class="cico">📍</div><div><strong>Location</strong><span>London, United Kingdom</span></div></div>
+    </div>
+    <div class="cform">
+      <div class="fr"><label>Your Name</label><input type="text" placeholder="e.g. Alex Johnson" id="fname"/></div>
+      <div class="fr"><label>Email Address</label><input type="email" placeholder="your@email.com" id="femail"/></div>
+      <div class="fr">
+        <label>Service Interested In</label>
+        <select id="fservice">
+          <option value="">Select a service…</option>
+          <option>Email Marketing</option>
+          <option>Social Media Marketing</option>
+          <option>SEO Strategy</option>
+          <option>Paid Advertising (PPC)</option>
+          <option>Content Marketing</option>
+          <option>Marketing Funnel Strategy</option>
+        </select>
+      </div>
+      <div class="fr"><label>Message</label><textarea placeholder="Tell us about your brand and goals…" id="fmsg"></textarea></div>
+      <button class="fsub" id="fsubbtn" onclick="submitForm()">Send Message →</button>
+      <div class="fsuccess" id="fsuccess">✓ Message sent! We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div class="fbrand">
+      <img src="./logo.png" alt="BuzzBurst Media" style="height:46px;"/>
+      <p>No one knows more about marketing. London's boldest digital agency — building brands that can't be ignored.</p>
+    </div>
+    <div class="fcol">
+      <h5>Services</h5>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Email Marketing</a>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Social Media</a>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">SEO Strategy</a>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Paid Ads (PPC)</a>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Content Marketing</a>
+      <a onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Funnel Strategy</a>
+    </div>
+    <div class="fcol">
+      <h5>Company</h5>
+      <a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About Us</a>
+      <a onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">Our Team</a>
+      <a onclick="document.getElementById('dashboard').scrollIntoView({behavior:'smooth'})">Analytics</a>
+      <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a>
+      <a onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">Get a Quote</a>
+    </div>
+    <div class="fcol">
+      <h5>Find Us</h5>
+      <a href="https://instagram.com/buzz.burs" target="_blank">@buzz.burs (IG)</a>
+      <a href="https://tiktok.com/@buzzburstmedia1" target="_blank">@buzzburstmedia1 (TT)</a>
+      <a href="http://buzzburstmedia.co" target="_blank">buzzburstmedia.co</a>
+      <a href="mailto:buzzburstmedia1@gmail.com">buzzburstmedia1@gmail.com</a>
+      <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">London, UK</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 BuzzBurst Media Ltd. Founded by <a href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Emmanuel Obiechie</a>. All rights reserved.</span>
+    <span>Built in <a href="http://buzzburstmedia.co" target="_blank">London</a> with passion</span>
+  </div>
+</footer>
+
+<script>
+function animCount(id,target,suf,dur){
+  const el=document.getElementById(id);if(!el)return;
+  let v=0;const step=target/(dur/16);
+  const t=setInterval(()=>{v=Math.min(v+step,target);el.textContent=Math.round(v)+suf;if(v>=target)clearInterval(t);},16);
+}
+setTimeout(()=>{
+  animCount('c1',120,'+',1200);
+  animCount('c2',450,'+',1400);
+  animCount('c3',340,'%',1600);
+  animCount('c4',28,'',1000);
+},500);
+
+const bdata=[{l:'Jan',v:72},{l:'Feb',v:85},{l:'Mar',v:91},{l:'Apr',v:78},{l:'May',v:110},{l:'Jun',v:128}];
+const mx=Math.max(...bdata.map(d=>d.v));
+const bc=document.getElementById('barchart');
+if(bc){bdata.forEach(d=>{
+  const w=document.createElement('div');w.className='bwrap';
+  const pct=Math.round((d.v/mx)*100);
+  const isLatest=d.l==='Jun';
+  w.innerHTML=`<div class="bar" style="height:${pct}%;background:${isLatest?'#F5A800':'rgba(245,168,0,0.35)'};" title="${d.v}K impressions"></div><span class="blbl">${d.l}</span>`;
+  bc.appendChild(w);
+});}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('active'));
+  const p=document.getElementById('tab-'+name);if(p)p.classList.add('active');
+  if(btn)btn.classList.add('active');
+}
+
+function submitForm(){
+  const n=document.getElementById('fname').value.trim();
+  const e=document.getElementById('femail').value.trim();
+  if(!n||!e){alert('Please fill in your name and email address.');return;}
+  document.getElementById('fsuccess').style.display='block';
+  document.getElementById('fsubbtn').style.display='none';
+}
+
+const acts=['TikTok video hit 50K views','Email campaign: 41% open rate','Keyword reached position #1','Google Ads CTR hit 8.2%','Instagram Reel went viral (120K)','Client milestone: 500K impressions'];
+const acols=['#4ADE80','#F5A800','#60A5FA','#F472B6','#A78BFA','#FBBF24'];
+let ai=0;
+setInterval(()=>{
+  const list=document.getElementById('alist');if(!list)return;
+  const items=list.querySelectorAll('.aitem');
+  ai=(ai+1)%acts.length;
+  const last=items[items.length-1];
+  if(last){
+    last.querySelector('.adot').style.background=acols[ai%acols.length];
+    last.querySelector('.atxt').textContent=acts[ai];
+    last.querySelector('.atm').textContent='just now';
+    list.insertBefore(last,items[0]);
+  }
+},3500);
+</script>
